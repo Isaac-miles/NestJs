@@ -28,5 +28,11 @@ export class UsersService {
       role: 'ENGINEER',
     },
   ];
+  findAll(role?: 'INTERN' | 'ENGINEER' | 'ADMIN') {
+    
+  }
   findOne() {}
+  create() {}
+  update() {}
+  delete() {}
 }
