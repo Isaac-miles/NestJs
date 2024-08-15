@@ -48,7 +48,7 @@ export class UsersService {
       ...user,
     };
     this.users.push(newUser);
-    return user;
+    return newUser;
   }
   update(
     id: number,
@@ -64,7 +64,7 @@ export class UsersService {
       }
       return user;
     });
-    this.findOne(id);
+    return this.findOne(id);
   }
   delete(id: number) {
     const removedUser = this.findOne(id);
