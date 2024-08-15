@@ -29,7 +29,9 @@ export class UsersService {
     },
   ];
   findAll(role?: 'INTERN' | 'ENGINEER' | 'ADMIN') {
-    
+    if(role){
+        return this.users.filter(user=> user.role=== role);
+    }
   }
   findOne() {}
   create() {}
