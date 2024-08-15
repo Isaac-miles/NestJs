@@ -8,31 +8,49 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
+import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
+  constructor(private readonly usersService: UsersService) {}
+
   @Get() //GET /users or /users?role=value
   findAll(@Query('role') role?: 'INTERN' | 'ENGINEER' | 'ADMIN') {
-    return [];
+    return this.usersService.findAll(role);
   }
 
   @Get(':id') // Get /users/:id
   findOne(@Param('id') id: string) {
-    return { userId: id };
+    return this.usersService.findOne(+id);
   }
 
   @Post() // POST /users
-  create(@Body() user: []) {
-    return user;
+  create(
+    @Body()
+    user: {
+      name: string;
+      email: string;
+      role: 'INTERN' | 'ENGINEER' | 'ADMIN';
+    },
+  ) {
+    return this.usersService.create(user);
   }
 
   @Patch(':id') // PATCH /users/:id
-  update(@Param('id') id: string, @Body() userUpdate: object) {
-    return { userId: id, ...userUpdate };
+  update(
+    @Param('id') id: string,
+    @Body()
+    updatedUser: {
+      name?: string;
+      email?: string;
+      role?: 'INTERN' | 'ENGINEER' | 'ADMIN';
+    },
+  ) {
+    return this.usersService.update(+id, updatedUser);
   }
 
   @Delete(':id') // DELETE /Users/:id
   deleteUser(@Param('id') id: string) {
-    return { userId: id };
+    return this.usersService.delete(+id);
   }
 }
