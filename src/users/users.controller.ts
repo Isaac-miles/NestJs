@@ -29,11 +29,7 @@ export class UsersController {
   @Post() // POST /users
   create(
     @Body()
-    user: {
-      name: string;
-      email: string;
-      role: 'INTERN' | 'ENGINEER' | 'ADMIN';
-    },
+    user: CreateUserDto,
   ) {
     return this.usersService.create(user);
   }
@@ -42,11 +38,7 @@ export class UsersController {
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body()
-    updatedUser: {
-      name?: string;
-      email?: string;
-      role?: 'INTERN' | 'ENGINEER' | 'ADMIN';
-    },
+    updatedUser: UpdateUserDto,
   ) {
     return this.usersService.update(id, updatedUser);
   }
