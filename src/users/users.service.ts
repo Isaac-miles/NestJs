@@ -37,12 +37,18 @@ export class UsersService {
   findOne(id: number) {
     return this.users.find((user) => user.id === id);
   }
-  create(user: {name:string, email:string, role:'INTERN' | 'ENGINEER' | 'ADMIN'}) {
+  create(user: {
+    name: string;
+    email: string;
+    role: 'INTERN' | 'ENGINEER' | 'ADMIN';
+  }) {
     const usersByHighestId = [...this.users].sort((a, b) => b.id - a.id);
     const newUser = {
-        id: usersByHighestId[0].id + 1,
-        ...user
-    }
+      id: usersByHighestId[0].id + 1,
+      ...user,
+    };
+    this.users.push(newUser);
+    return user;
   }
   update() {}
   delete() {}
